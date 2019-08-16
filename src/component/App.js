@@ -25,9 +25,9 @@ class App extends Component{
     
     return(
       <div>
-       <Header/>,
-       <Dashboard/>
-        </div>
+        <Header/>
+        <Dashboard/>
+      </div>
     )
   }
 }
