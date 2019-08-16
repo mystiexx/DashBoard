@@ -1,0 +1,164 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+
+.navbar {
+    background: linear-gradient(to right, #a517ba, #5f1782);
+    padding: 0 !important;
+}
+
+.nav-link .link {
+    color: white;
+    font-weight: 600;
+    margin-left: 40px; 
+}
+
+.navbar-brand img {
+    height: 40px;
+    padding-left: 20px;
+}
+
+
+.title::before {
+    content: '';
+    background: #7b1798;
+    height: 5px;
+    width: 150px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    transform: translateY(56px);
+}
+
+.title::after {
+    content: '';
+    background: #7b1798;
+    height: 10px;
+    width: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 40px;
+    display: block;
+    transform: translateY(8px);
+}
+
+
+.sign-title::before {
+    content: '';
+    background: #7b1798;
+    height: 5px;
+    width: 150px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    transform: translateY(63px);
+}
+
+.sign-title::after {
+    content: '';
+    background: #7b1798;
+    height: 10px;
+    width: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 40px;
+    display: block;
+    transform: translateY(8px);
+}
+
+.stories-title::before {
+    content: '';
+    background: #7b1798;
+    height: 5px;
+    width: 150px;
+    margin-left: 40%;
+    margin-right: auto;
+    display: block;
+    transform: translateY(53px);
+}
+
+.stories-title::after {
+    content: '';
+    background: #7b1798;
+    height: 10px;
+    width: 50px;
+    margin-left: 45%;
+    margin-right: auto;
+    margin-bottom: 40px;
+    display: block;
+    transform: translateY(7px);
+}
+
+
+
+.box h2 {
+    font-family: 'Arial';
+    font-size: 30px;
+}
+
+.box h3 {
+    font-family: 'Arial';
+    font-weight: bolder;
+    font-size: 40px;
+}
+
+.card-contain {
+    background-image: url('../images/color.png');
+    background-origin: border-box;
+    background-size: cover;
+
+}
+
+.text {
+    font-size: 20px;
+}
+
+.dash {
+    width: 10%;
+    height: 3vh;
+    background-color: black;
+    border: none;
+    padding: 5px 2px;
+}
+
+.sign_in {
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    padding: 5px;
+    height: 70vh;
+    box-sizing: border-box;
+    transform: translate(-50%, -50%)
+}
+
+.sign {
+    padding: 2px 20px;
+}
+
+.sign_in .sign h3{
+    text-align: center;
+    font-size: 40px;
+}
+
+.sign label {
+    font-size: 20px;
+    font-weight: bold;
+    font-family: 'Arial'
+}
+
+.card-img-top:hover {
+    opacity: 0.6;
+}
+
+.card-group .card {
+    cursor: pointer;
+}
+
+.img-story {
+    height: 200px;
+}
+
