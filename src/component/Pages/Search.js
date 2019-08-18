@@ -5,7 +5,7 @@ class SearchBar extends Component{
     render(){
         const { searchChange } = this.props;
         return(
-            <div>
+            <div style={{margin:50}}>
                 <section id="search">
                 <div className="container">
                 <div class="search-box">
