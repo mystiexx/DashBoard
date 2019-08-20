@@ -1,15 +1,60 @@
 import React,{Component} from 'react'
 import StoryBoard from './StoryBoard'
+import Header2 from '../Nav/Header2'
+import Search from '../Pages/Search';
 
 const initialState = {
     route: 'upload',
-    isUploaded: false
+    isUploaded: false,
+    title: '',
+    tagline: '',
+    imgUrl: '',
+    vidUrl: '',
+    desc: '',
+    upload: {
+        Utitle: '',
+        Utagline: '',
+        UimgUrl: '',
+        UvidUrl: '',
+        Udesc: ''
+    }
 }
 
 class DashBoard extends Component {
     constructor(){
         super();
         this.state = initialState
+    }
+
+    ontitleChange = (e) => {
+        const { value } = e.target
+        this.setState({
+            title: value
+        })
+    }
+    ontaglineChange = (e) => {
+        const { value } = e.target
+        this.setState({
+            tagline: value
+        })
+    }
+    onimageChange = (e) => {
+        const { value } = e.target
+        this.setState({
+            imgUrl: value
+        })
+    }
+    onvideoChange = (e) => {
+        const { value } = e.target
+        this.setState({
+            vidUrl: value
+        })
+    }
+    ondescChange = (e) => {
+        const { value } = e.target
+        this.setState({
+            desc: value
+        })
     }
 
     onRouteChange= (route) => {
@@ -20,8 +65,45 @@ class DashBoard extends Component {
         }
         this.setState({route: route})
     }
+
+    feed = (data) => {
+        this.setState({
+            upload: {
+                Utitle: data.title,
+                Utagline: data.tagline,
+                UimgUrl: data.imageurl,
+                UvidUrl: data.videourl,
+                Udesc: data.description
+            }
+        })
+      }
+
+    onUpload = () => {
+        fetch('http://localhost:6536/upload', {
+            method: 'put',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+               title: this.state.title,
+               tagline: this.state.tagline,
+               imageurl: this.state.imgUrl,
+               videourl: this.state.vidUrl,
+               description: this.state.desc 
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.id){
+                this.feed(data)
+                this.onRouteChange('uploaded')
+            }
+        })
+    }
+
+     
     render(){
-        const {title} = this.props
+        const {title, feeds} = this.props
+
+        const feedComp = feeds.map(detail => <StoryBoard key={detail.id} imgUrl={detail.imageurl} title={detail.title} desc={detail.description}/>)
         return(
             <div>
                 {
@@ -43,7 +125,7 @@ class DashBoard extends Component {
                         <div class="card-contain p-5 mb-5 rounded shadow-sm">
                                 <div class="box">
                                     <h2>Welcome</h2>
-                                    <h3>Moses Sapele</h3>
+                                    <h3>{this.props.name}</h3>
                             </div>
                         </div>
                         <div class="row">
@@ -58,26 +140,26 @@ class DashBoard extends Component {
                                                 <div class="input-group-append">
                                                     <span class="input-group-text">Title</span>
                                                 </div>
-                                                <input type="text" class="form-control" />
+                                                <input onChange={this.ontitleChange} type="text" class="form-control" />
                                             </div>
                                             <div class="input-group mb-3">
                                                 <div class="input-group-append">
                                                     <span class="input-group-text">Tagline</span>
                                                 </div>
-                                                <input type="text" class="form-control" />
+                                                <input onChange={this.ontaglineChange} type="text" class="form-control" />
                                             </div>
                                             <div class="input-group mb-3">
                                                 <div class="input-group-append">
                                                     <span class="input-group-text">Youtube URL</span>
                                                 </div>
-                                                <input type="text" class="form-control" />
+                                                <input onChange={this.onvideoChange} type="text" class="form-control" />
                                             </div>
                                             <div class="input-group mb-3">
                                                 <div class="input-group-append">
                                                     <span class="input-group-text">Add Image</span>
                                                 </div>
                                                 <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" />
+                                                        <input onChange={this.onimageChange} type="file" class="custom-file-input" />
                                                         <span class="custom-file-label">Choose file</span>
                                                 </div>
                                             
@@ -86,10 +168,10 @@ class DashBoard extends Component {
                                                 <div class="input-group-append">
                                                     <span class="input-group-text">Description</span>
                                                 </div>
-                                                <textarea class="form-control" rows="4" /></div>
+                                                <textarea onChange={this.ondescChange} class="form-control" rows="4" /></div>
 
                                             <button
-                                                onClick={() => this.onRouteChange('uploaded')} 
+                                                onClick={this.onUpload} 
                                                 class="btn btn-outline-dark btn-lg">Publish</button>
                                         </div>
                                 </div>
@@ -100,7 +182,10 @@ class DashBoard extends Component {
                 </div>
                 </div>
                 :
-                <StoryBoard />
+                    <div>
+                        <Header2/>
+                        <Search feeds={feedComp}/>,
+                    </div>
                 }
             </div>
         )

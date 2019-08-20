@@ -11,7 +11,13 @@ const initialState = {
     content: '',
     searchfield: '',
     route: 'signin',
-    isSignedin: false
+    isSignedin: false,
+    feeds:[],
+    users: {
+      id: '',
+      name: '',
+      email: ''
+    }
 }
 
 class App extends Component{
@@ -25,11 +31,31 @@ class App extends Component{
   onRouteChange = (route) => {
     if (route ==='signin'){
       this.setState({initialState})
-    } else if (route === 'dash' || route === 'upload'){
+    } else if (route === 'upload'){
       this.setState({isSignedin: true})
     }
     this.setState({route: route})
   }
+
+  loadUser = (data) => {
+    this.setState({
+        users: {
+            id: data.id,
+            name: data.fullname,
+            email: data.email
+        }
+  
+    })
+  }
+  componentDidMount() {
+    fetch('http://localhost:6536/feed')
+      .then(res => res.json())
+          .then(feeds => {
+              this.setState({
+                  feeds: feeds
+              })
+          })
+}
 	// }
   render(){
     // const filteredContent = this.state.content.filter(content => {
@@ -42,12 +68,12 @@ class App extends Component{
         this.state.route === 'signin' ?
           <div>
             <Header2 />
-            <SignUp onRouteChange={this.onRouteChange}/>
+            <SignUp loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
           </div>
         :
           <div>
             <Header onRouteChange={this.onRouteChange}/>
-            <Dashboard/>
+            <Dashboard name={this.state.users.name} feeds={this.state.feeds}/>
           </div>
       }
       </div>

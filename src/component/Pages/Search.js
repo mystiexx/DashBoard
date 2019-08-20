@@ -5,19 +5,20 @@ class SearchBar extends Component{
     render(){
         const { searchChange } = this.props;
         return(
-            <div style={{margin:50}}>
+            <div>
                 <section id="search">
                 <div className="container">
                 <div class="search-box">
-            <input type="text" class="search-txt" onChange={searchChange} placeholder="Type to search"/>
-            <div class="search-btn mb-5" href=""><FaSearch/></div>
-        </div>
+                    <input type="text" class="search-txt" onChange={searchChange} placeholder="Type to search"/>
+                 <div class="search-btn mb-5" href=""><FaSearch/></div>
+                </div>
 
                 </div>
 
                 </section>
-
-                </div>
+                <h2 className="stories-title text-center"> Stories </h2>
+                {this.props.feeds}
+            </div>
         )
     }
 }
