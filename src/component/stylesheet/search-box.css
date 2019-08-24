@@ -2,7 +2,7 @@
     margin-top: 1%;
     margin-left: 50%;
     transform: translate(-50%,-2%);
-    background:  linear-gradient(to right, #a517ba, #5f1782);
+    background:  linear-gradient(135deg, rgb(243, 107, 55) 0%, rgb(243, 107, 55) 23%,rgb(244, 133, 60) 23%, rgb(244, 133, 60) 27%,rgb(245, 159, 64) 27%, rgb(245, 159, 64) 73%,rgb(245, 186, 69) 73%, rgb(245, 186, 69) 74%,rgb(246, 212, 73) 74%, rgb(246, 212, 73) 78%,rgb(247, 238, 78) 78%, rgb(247, 238, 78) 100%);
     height: 60px;
     border-radius: 60px;
     padding: 10px;
@@ -14,7 +14,7 @@
 }
 
 .search-box:hover > .search-btn {
-   background:  #a517ba;
+   background:   rgb(245, 186, 69);
 }
 
 .search-btn {
@@ -23,7 +23,7 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: #5f1782;
+    background: rgb(243, 107, 55);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -64,21 +64,6 @@
     width: 100%;
 }
 
-main {
-    padding: 18px 10px;
-}
-
-article{
-    display: flex;
-    align-items: center;
-    padding: 8px 12px;
-    border-radius: 8px;
-    margin: 0 auto;
-}
-
-article:hover {
-    border: 2px solid #7b1798;
-}
 
 .thumb {
     height: 70px;

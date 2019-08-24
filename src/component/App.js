@@ -1,82 +1,63 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Header from './Nav/Header';
-import Header2 from './Nav/Header2';
 import Dashboard from './Pages/Dashboard'
-import SignUp from './Pages/SignUp'
-
+import SignIn from './Pages/SignIn'
+import SignUp from './Pages/Register'
+import StoryBoard from './Pages/StoryBoard'
+import SearchBar from './Pages/Search'
 import './stylesheet/style.css'
 import './stylesheet/search-box.css'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
-const initialState = {
-    content: '',
-    searchfield: '',
-    route: 'signin',
-    isSignedin: false,
-    feeds:[],
-    users: {
-      id: '',
-      name: '',
+
+class App extends Component {
+  constructor(){
+    super();
+    this.state = {
       email: ''
     }
-}
-
-class App extends Component{
-  constructor (){
-    super ()
-    this.state = initialState 
-  }
-  // onSearchChange = (event) => {
-	// 	this.setState({searchfield: event.target.value})
-     
-  onRouteChange = (route) => {
-    if (route ==='signin'){
-      this.setState({initialState})
-    } else if (route === 'upload'){
-      this.setState({isSignedin: true})
-    }
-    this.setState({route: route})
   }
 
   loadUser = (data) => {
     this.setState({
-        users: {
-            id: data.id,
-            name: data.fullname,
-            email: data.email
-        }
-  
+      email: data.email
     })
   }
-  componentDidMount() {
-    fetch('http://localhost:6536/feed')
-      .then(res => res.json())
-          .then(feeds => {
-              this.setState({
-                  feeds: feeds
-              })
-          })
-}
-	// }
-  render(){
+
+  render() {
     // const filteredContent = this.state.content.filter(content => {
-		// 	return content.title.toLowerCase().includes(this.state.searchfield.toLowerCase());
+    // 	return content.title.toLowerCase().includes(this.state.searchfield.toLowerCase());
     // }
-    
-    return(
-      <div> 
-      {
-        this.state.route === 'signin' ?
-          <div>
-            <Header2 />
-            <SignUp loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
-          </div>
-        :
-          <div>
-            <Header onRouteChange={this.onRouteChange}/>
-            <Dashboard name={this.state.users.name} feeds={this.state.feeds}/>
-          </div>
-      }
-      </div>
+
+    return (
+      <Router>
+        <div>
+
+          <Route path="/" exact render={props =>
+            <div> <SignUp loadUser={this.loadUser} /> </div>} />
+
+             <Route path="/signin" exact render={props =>
+            <div> <SignIn /> </div>} />
+
+         
+          <Route path="/dashboard" exact render={props =>
+            <div>
+               <Header />
+              <Dashboard />
+            </div>} />
+
+          <Route path="/story" exact render={props =>
+            <div> 
+              <Header />,
+              <SearchBar/>
+              <StoryBoard /> </div>} />
+
+
+
+
+
+        </div>
+      </Router>
     )
   }
 }

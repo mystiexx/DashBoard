@@ -1,21 +1,20 @@
 import React, { Component } from 'react'
-
 import {Container, Card, Button } from 'react-bootstrap'
 
 
 class StoryBoard extends Component {
     render(){
-        const {title,imgUrl, desc} = this.props
         return(
-            <div>
+            <div className="story">
                 <Container className="mt-5">
-                    <Card className="shadow-sm mt-4">
+                <h2 className="stories-title text-center"> Stories </h2>
+                    <Card className="shadow-sm mt-5">
                     <Card.Body>
                     <section className="d-flex inline-block">
-                            <img src={imgUrl} alt="img" className="img-story"/>
+                            <img src="" alt="img" className="img-story"/>
                             <div className="details">
-                            <h4 className="display-5">{title}</h4>
-                            <p>{desc}</p>
+                            <h4 className="display-5">title</h4>
+                            <p>desc</p>
                                  </div>
                                  </section>
                                  <section className="ml-auto float-right">

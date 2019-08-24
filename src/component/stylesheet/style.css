@@ -4,10 +4,14 @@
     box-sizing: border-box;
 }
 
-
+.sign-box{
+    background: linear-gradient(135deg, rgb(243, 107, 55) 0%, rgb(243, 107, 55) 23%,rgb(244, 133, 60) 23%, rgb(244, 133, 60) 27%,rgb(245, 159, 64) 27%, rgb(245, 159, 64) 73%,rgb(245, 186, 69) 73%, rgb(245, 186, 69) 74%,rgb(246, 212, 73) 74%, rgb(246, 212, 73) 78%,rgb(247, 238, 78) 78%, rgb(247, 238, 78) 100%);
+    background-size: contain;
+    height: 100vh;
+}
 
 .navbar {
-    background: linear-gradient(to right, #a517ba, #5f1782);
+    background: linear-gradient(135deg, rgb(243, 107, 55) 0%, rgb(243, 107, 55) 23%,rgb(244, 133, 60) 23%, rgb(244, 133, 60) 27%,rgb(245, 159, 64) 27%, rgb(245, 159, 64) 73%,rgb(245, 186, 69) 73%, rgb(245, 186, 69) 74%,rgb(246, 212, 73) 74%, rgb(246, 212, 73) 78%,rgb(247, 238, 78) 78%, rgb(247, 238, 78) 100%);
     padding: 0 !important;
 }
 
@@ -75,7 +79,7 @@
     background: #7b1798;
     height: 5px;
     width: 150px;
-    margin-left: 40%;
+    margin-left: auto;
     margin-right: auto;
     display: block;
     transform: translateY(53px);
@@ -86,7 +90,7 @@
     background: #7b1798;
     height: 10px;
     width: 50px;
-    margin-left: 45%;
+    margin-left: auto;
     margin-right: auto;
     margin-bottom: 40px;
     display: block;
