@@ -45,31 +45,33 @@ class SignUp extends Component {
     render() {
         return (
             <div>
-                <div class="container-fluid">
-                    <div class="sign-box">
-                        <div class="sign_in shadow rounded" style={{ width: 25 + 'rem', backgroundColor: 'white' }}>
-                            <div class="sign rounded mt-5">
-                                <h3 className="sign-title">Sign-Up</h3>
+                <div className="container-fluid sign-box">
+                        <div className="sign_in shadow rounded" style={{ width: 25 + 'rem', backgroundColor: 'white' }}>
+                            <div className="sign rounded mt-5">
+                                <h3 className="sign-title">Register</h3>
                                 <div>
-                                    <div class="form-group">
+                                    <div className="form-group">
                                         <h5>Email</h5>
                                         <input
                                             onChange={this.onEmailChange}
                                             type="text"
-                                            class="form-control"
+                                            className="form-control"
                                             placeholder="Enter Email" />
                                     </div>
-                                    <div class="form-group">
+                                    <div className="form-group">
                                         <h5>Password</h5>
                                         <input
                                             onChange={this.onPassChange}
                                             type="password"
-                                            class="form-control"
+                                            className="form-control"
                                             placeholder="Password" />
                                     </div>
                                     <br />
                                     
-                                        <button onClick={this.onSubmitRegister} class="btn btn-outline-dark btn-block"> Sign Up</button>
+                                        <button 
+                                        onClick={this.onSubmitRegister} 
+                                        className="btn btn-outline-dark btn-block"> 
+                                        Register</button>
         
 
                                 </div>
@@ -78,7 +80,6 @@ class SignUp extends Component {
                     </div>
                 </div>
 
-            </div>
         )
     }
 }

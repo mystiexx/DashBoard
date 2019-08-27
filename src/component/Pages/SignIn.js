@@ -7,18 +7,17 @@ class SignIn extends Component {
 
         return (
             <div>
-                <div class="container-fluid">
-                    <div class="sign-box">
-                        <div class="sign_in shadow rounded" style={{ width: 25 + 'rem', backgroundColor: 'white' }}>
-                            <div class="sign rounded mt-5">
-                                <h3 className="sign-title">Sign-In</h3>
+                <div className="container-fluid sign-box">
+                        <div className="sign_in shadow rounded" style={{ width: 25 + 'rem', backgroundColor: 'white' }}>
+                            <div className="sign rounded mt-5">
+                                <h3 className="sign-title">Log-In</h3>
                                 <div>
                                     <div class="form-group">
                                         <h5>Username</h5>
                                         <input
 
                                             type="text"
-                                            class="form-control"
+                                            className="form-control"
                                             placeholder="Enter Username" />
                                     </div>
                                     <div class="form-group">
@@ -26,20 +25,17 @@ class SignIn extends Component {
                                         <input
 
                                             type="password"
-                                            class="form-control"
+                                            className="form-control"
                                             placeholder="Password" />
                                     </div>
                                     <br />
-                                    <button
-
-                                        class="btn btn-outline-dark btn-block">Sign In</button>
+                                    <button className="btn btn-outline-dark btn-block">Log-In</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-            </div>
         )
     }
 }
