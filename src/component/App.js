@@ -2,11 +2,18 @@ import React, {Component} from 'react';
 import Header from './Nav/Header';
 import Header2 from './Nav/Header2';
 import Dashboard from './Pages/Dashboard'
+<<<<<<< Updated upstream
 import SignUp from './Pages/SignUp'
 
+=======
+import Tab from './Pages/Tabs'
+import StoryBoard from './Pages/StoryBoard'
+import SearchBar from './Pages/Search'
+>>>>>>> Stashed changes
 import './stylesheet/style.css'
 import './stylesheet/search-box.css'
 
+<<<<<<< Updated upstream
 const initialState = {
     content: '',
     searchfield: '',
@@ -58,9 +65,15 @@ class App extends Component{
 }
 	// }
   render(){
+=======
+class App extends Component {
+
+  render() {
+>>>>>>> Stashed changes
     // const filteredContent = this.state.content.filter(content => {
 		// 	return content.title.toLowerCase().includes(this.state.searchfield.toLowerCase());
     // }
+<<<<<<< Updated upstream
     
     return(
       <div> 
@@ -77,6 +90,33 @@ class App extends Component{
           </div>
       }
       </div>
+=======
+
+    return (
+      <Router>
+        <div>
+
+          <Route path="/" exact component={Tab}/>
+
+          <Route path="/dashboard" exact render={props =>
+            <div>
+               <Header />
+              <Dashboard />
+            </div>} />
+
+          <Route path="/story" exact render={props =>
+            <div> 
+              <Header />,
+              <SearchBar/>
+              <StoryBoard /> </div>} />
+
+
+
+
+
+        </div>
+      </Router>
+>>>>>>> Stashed changes
     )
   }
 }
