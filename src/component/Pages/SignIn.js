@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 class SignIn extends Component {
 
@@ -29,7 +29,9 @@ class SignIn extends Component {
                                             placeholder="Password" />
                                     </div>
                                     <br />
+                                    <Link to="/dashboard">
                                     <button className="btn btn-outline-dark btn-block">Log-In</button>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
