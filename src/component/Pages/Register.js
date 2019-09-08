@@ -31,14 +31,8 @@ class SignUp extends Component {
             })
         })
             .then(response => response.json())
-            .then(user => {
-                loadUser(user);
-                const authButton = withRouter(({history}) => {
-                    user ? (
-                    history.push('/signin')
-                    ) : 
-                    alert('cannot register')
-                })
+            .then(data => {
+                loadUser(data)
             })
     }
 
@@ -67,12 +61,11 @@ class SignUp extends Component {
                                             placeholder="Password" />
                                     </div>
                                     <br />
-                                        <button 
+                                    <button 
                                         onClick={this.onSubmitRegister} 
                                         className="btn btn-outline-dark btn-block"> 
-                                        Register</button>
-        
-
+                                        Register
+                                    </button>
                                 </div>
                             </div>
                         </div>

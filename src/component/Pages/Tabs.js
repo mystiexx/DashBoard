@@ -4,15 +4,27 @@ import SignIn from './SignIn'
 import SignUp from './Register'
 
 class Tab extends Component {
+    constructor(){
+        super();
+        this.state = {
+            userEmail: ''
+        }
+    }
+
+    loadUser = (data) => {
+        this.setState({userEmail: data.result})
+    }
+
     render(){
+        console.log(this.state.userEmail)
         return(
             <div>
-                <Tabs defaulActiveKey="register" transition={false} id="uncontrolled-tab-example">
+                <Tabs defaulactivekey="register" transition={false} id="uncontrolled-tab-example">
                     <Tab eventKey="log" title="Log In">
-                        <SignIn/>
+                        <SignIn loadUser={this.loadUser}/>
                     </Tab>
                     <Tab eventKey="register" title="Register">
-                        <SignUp/>
+                        <SignUp loadUser={this.loadUser}/>
                         </Tab>
                 </Tabs>
             </div>

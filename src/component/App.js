@@ -18,27 +18,27 @@ class App extends Component {
 
     return (
       <Router>
-        <div>
+        <Switch>
 
-          <Route path="/" exact component={Tab}/>
+            <Route path="/" exact component={Tab}/>
 
-          <Route path="/dashboard" exact render={props =>
+            <Route path="/dashboard" exact render={props =>
             <div>
                <Header />
               <Dashboard />
             </div>} />
 
-          <Route path="/story" exact render={props =>
+            <Route path="/story" exact render={props =>
             <div> 
               <Header />,
               <SearchBar/>
-              <StoryBoard /> </div>} />
+              <StoryBoard /> 
+            </div>} />
 
-
-
-
-
-        </div>
+            <Route render={() => 
+              <h1>Page Not Found</h1>
+            } />
+        </Switch>
       </Router>
     )
   }
