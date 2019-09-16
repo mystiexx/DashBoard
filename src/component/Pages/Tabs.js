@@ -7,7 +7,7 @@ class Tab extends Component {
     render(){
         return(
             <div>
-                <Tabs defaulActiveKey="register" transition={false} id="uncontrolled-tab-example">
+                <Tabs defaulactivekey="register" transition={false} id="uncontrolled-tab-example">
                     <Tab eventKey="log" title="Log In">
                         <SignIn/>
                     </Tab>
@@ -15,6 +15,7 @@ class Tab extends Component {
                         <SignUp/>
                         </Tab>
                 </Tabs>
+
             </div>
         )
     }

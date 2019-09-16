@@ -8,10 +8,17 @@ import SignUp from './Pages/SignUp'
 =======
 import Tab from './Pages/Tabs'
 import StoryBoard from './Pages/StoryBoard'
+<<<<<<< Updated upstream
 import SearchBar from './Pages/Search'
 >>>>>>> Stashed changes
 import './stylesheet/style.css'
 import './stylesheet/search-box.css'
+=======
+import './stylesheet/style.css'
+import './stylesheet/search-box.css'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+import StoryPage from './Pages/StoryPage';
+>>>>>>> Stashed changes
 
 <<<<<<< Updated upstream
 const initialState = {
@@ -96,19 +103,19 @@ class App extends Component {
       <Router>
         <div>
 
-          <Route path="/" exact component={Tab}/>
+          <Route path="/" exact component={Tab} />
 
-          <Route path="/dashboard" exact render={props =>
-            <div>
-               <Header />
-              <Dashboard />
-            </div>} />
+          <Route path="/dashboard" component={Header}/>
 
-          <Route path="/story" exact render={props =>
-            <div> 
-              <Header />,
-              <SearchBar/>
-              <StoryBoard /> </div>} />
+          <Route path="/dashboard" exact component={Dashboard}/>
+
+          <Route path="/story" component={Header}/>
+
+          <Route path="/story" exact component={StoryBoard} />
+
+          <Route path="/stories/:id" component={Header}/>
+
+          <Route path="/stories/:id" exact component={StoryPage}/>
 
 
 
