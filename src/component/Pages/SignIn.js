@@ -1,91 +1,85 @@
-import React, {
-    Component
-} from 'react'
-import {
-    Link
-} from 'react-router-dom';
-import DashBoard from './Dashboard';
+import React, { Component } from 'react'
+import {Redirect} from 'react-router-dom'
 
-
-class SignIn extends Component {
-    constructor () {
-        super();
-        this.state = {
-            isAuthenticated: false,
-            location: '',
-            email: '',
-            password: '',
-        }
+ export default class SignIn extends Component {
+    state = {
+        email: '',
+        password: '',
+        loading:false
     }
 
-    onEmailChange = (e) => {
-        const {value} = e.target;
-        this.setState({email : value})
-    }
-    onPassChange = (e) => {
-        const {value} = e.target;
-        this.setState({password : value})
+    handleChange = (event) => {
+        this.setState({
+            [event.target.name] : event.target.value
+        })
     }
 
     login = () => {
-        const {loadUser,}  = this.props
+        this.setState({ loading: true });
+        const { email, password } = this.state;
+        const obj = {
+            email,
+            password
+        }
         fetch('http://localhost:6530/user/login', {
-            method: 'post',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                email: this.state.email,
-                password: this.state.password
-            })
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(obj)
+
+        }).then(res => res.json()).then(data => {
+            if (data.token) {
+               this.setState({ loggedIn: true});
+               localStorage.setItem('token', data.token);
+            } else{ 
+                this.setState({ message: 'invalid email/password combination'});
+            }
+            this.setState({ loading:false });
+        }).catch(err => {
+            this.setState({ message: 'unexpected error occured'});
         })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data)
-                loadUser(data)
-                if(data.result) {
-                   
-                } else {
-                    return console.log('error')
-                }
-            })
     }
 
     render() {
-        let locations = ""
-        return ( 
+
+        return (
             <div>
-            <div className = "container-fluid sign-box" >
-            <div className = "sign_in shadow rounded"
-            style = {
-                {
-                    width: 25 + 'rem',
-                    backgroundColor: 'white'
-                }
-            } >
-            <div className = "sign rounded mt-5" >
-            <h3 className = "sign-title" > Log - In </h3> <div >
-            <div className = "form-group" >
-            <h5> Username </h5> 
-            <input 
-                type = "text"
-                onChange={this.onEmailChange}
-                className = "form-control"
-                placeholder = "Enter Username" 
-            />
-            </div> <div className = "form-group" >
-            <h5> Password </h5> 
-            <input
-                type = "password"
-                onChange={this.onPassChange}
-                className = "form-control"
-                placeholder = "Password"
-            />
-            </div> <br/>
-            <Link to = {locations} >
-            <button onClick={this.login} className = "btn btn-outline-dark btn-block" > Log - In </button></Link>
-            </div> </div> </div> </div> </div>
+                <div className="container-fluid sign-box">
+                        <div className="sign_in shadow rounded p-4">
+                            <div className="sign rounded">
+                                <div className="card-body">
+                                <h3 className="sign-title">Log-In</h3>
+                                <div>
+                                    <div className="form-group">
+                                        <h5>Email</h5>
+                                        <input
+                                            onChange={this.handleChange}
+                                            name='email'
+                                            type="text"
+                                            className="form-control"
+                                            placeholder="Enter Username" />
+                                    </div>
+                                    <div className="form-group">
+                                        <h5>Password</h5>
+                                        <input  
+                                            onChange={this.handleChange}
+                                            type="password"
+                                            name='password'
+                                            className="form-control"
+                                            placeholder="Password" />
+                                    </div>
+                                    <br />
+                                    <p className='text-danger'> {this.state.message} </p>
+                                    <button disabled={this.state.loading} onClick={this.login} className="btn btn-outline-dark btn-block" > {this.state.loading ? 'Loading' : 'Log in'}</button>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {this.state.loggedIn && <Redirect to='/dashboard' push /> }
+                </div>
 
         )
     }
 }
-
-export default SignIn;

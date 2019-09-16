@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link, withRouter } from 'react-router-dom'
 
 class SignUp extends Component {
     constructor() {
@@ -21,7 +20,6 @@ class SignUp extends Component {
 
     
     onSubmitRegister = () => {
-        const {loadUser,}  = this.props
         fetch('http://localhost:6530/user/register', {
             method: 'post',
             headers: { 'Content-Type': 'application/json' },
@@ -31,17 +29,15 @@ class SignUp extends Component {
             })
         })
             .then(response => response.json())
-            .then(data => {
-                loadUser(data)
-            })
+            .then(console.log)
     }
 
     render() {
         return (
             <div>
                 <div className="container-fluid sign-box">
-                        <div className="sign_in shadow rounded" style={{ width: 25 + 'rem', backgroundColor: 'white' }}>
-                            <div className="sign rounded mt-5">
+                        <div className="sign_in shadow rounded p-4">
+                            <div className="sign rounded">
                                 <h3 className="sign-title">Register</h3>
                                 <div>
                                     <div className="form-group">
@@ -61,11 +57,12 @@ class SignUp extends Component {
                                             placeholder="Password" />
                                     </div>
                                     <br />
-                                    <button 
+                                        <button 
                                         onClick={this.onSubmitRegister} 
                                         className="btn btn-outline-dark btn-block"> 
-                                        Register
-                                    </button>
+                                        Register</button>
+        
+
                                 </div>
                             </div>
                         </div>
