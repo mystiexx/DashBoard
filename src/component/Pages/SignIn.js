@@ -1,9 +1,5 @@
 import React, { Component } from 'react'
-<<<<<<< Updated upstream
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-=======
 import {Redirect} from 'react-router-dom'
->>>>>>> Stashed changes
 
  export default class SignIn extends Component {
     state = {
@@ -74,13 +70,9 @@ import {Redirect} from 'react-router-dom'
                                             placeholder="Password" />
                                     </div>
                                     <br />
-<<<<<<< Updated upstream
-                                    <button className="btn btn-outline-dark btn-block">Log-In</button>
-=======
                                     <p className='text-danger'> {this.state.message} </p>
                                     <button disabled={this.state.loading} onClick={this.login} className="btn btn-outline-dark btn-block" > {this.state.loading ? 'Loading' : 'Log in'}</button>
                                 </div>
->>>>>>> Stashed changes
                                 </div>
                             </div>
                         </div>

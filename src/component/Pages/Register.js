@@ -57,7 +57,6 @@ class SignUp extends Component {
                                             placeholder="Password" />
                                     </div>
                                     <br />
-                                    
                                         <button 
                                         onClick={this.onSubmitRegister} 
                                         className="btn btn-outline-dark btn-block"> 
