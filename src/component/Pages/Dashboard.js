@@ -1,27 +1,57 @@
 import React, { Component } from 'react'
+import Header from '../Nav/Header';
 
 class DashBoard extends Component {
-    constructor(){
-        super()
-        this.state = {
-            content: [],
-        }
+    state = {
+        content: [],
+        title: '',
+        tagline: '',
+        videoUrl: '',
+        imageUrl: '',
+        desc: ''
     }
 
-    componentDidMount(){
-        fetch('http://localhost:6530/feed')
-        .then(response => response.json())
-        .then(feeds => {
-          this.setState({
-            content: feeds.feeds
-          })
-        })    
+    handleChange = (event) => {
+        this.setState({[event.target.name]: event.target.value})
+    }
+
+    componentDidMount () {
+        const token = localStorage.getItem('token');
+        if (!token) window.location.href='/';
+    }
+
+    onSubmitFeed = () => {
+        const token = localStorage.getItem('token');
+        const obj = {
+            title: this.state.title,
+            tagline: this.state.tagline,
+            videoUrl: this.state.videoUrl,
+            imageUrl: this.state.imageUrl,
+            desc: this.state.desc
+        }
+
+        fetch('http://localhost:6530/feed/', {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(obj)
+        }).then(res => res.json()).then(console.log)
+        .catch(error => this.setState({message: error}))
+        this.setState({
+            title: '',
+            tagline: '',
+            videoUrl: '',
+            imageUrl: '',
+            desc: ''
+        })
     }
 
     render() {
+        console.log(this.state.title)
         return (
             <div>
-
                 <div className="container-fluid flex-column mt-2 flex-wrap  justify-content-center">
                     <div className="row mt-3">
                         <div className="col-md-3 mt-2">
@@ -46,35 +76,35 @@ class DashBoard extends Component {
                                                     <div className="input-group-append">
                                                         <span className="input-group-text">Title</span>
                                                     </div>
-                                                    <input  type="text" className="form-control" />
+                                                    <input onChange={this.handleChange} name='title' type="text" className="form-control" />
                                                 </div>
                                                 <div className="input-group mb-3">
                                                     <div className="input-group-append">
                                                         <span className="input-group-text">Tagline</span>
                                                     </div>
-                                                    <input  type="text" className="form-control" />
+                                                    <input onChange={this.handleChange} name='tagline'  type="text" className="form-control" />
                                                 </div>
                                                 <div className="input-group mb-3">
                                                     <div className="input-group-append">
                                                         <span className="input-group-text">Youtube URL</span>
                                                     </div>
-                                                    <input  type="text" className="form-control" />
+                                                    <input  onChange={this.handleChange}name='videoUrl' type="text" className="form-control" />
                                                 </div>
                                                 <div className="input-group mb-3">
                                                     <div className="input-group-append">
                                                         <span className="input-group-text">Image URL</span>
                                                     </div>
-                                                    <input  type="text" className="form-control" />
+                                                    <input onChange={this.handleChange} name='imageUrl' type="text" className="form-control" />
                                                 </div>
                                         
                                                 <div className="input-group mb-3">
                                                     <div className="input-group-append">
                                                         <span className="input-group-text">Description</span>
                                                     </div>
-                                                    <textarea  className="form-control" rows="4" /></div>
+                                                    <textarea onChange={this.handleChange} name='desc' className="form-control" rows="4" /></div>
 
                                                 <button
-                                                    
+                                                    onClick={this.onSubmitFeed}
                                                     className
                                                     ="btn btn-outline-dark btn-lg">Publish</button>
                                             </div>

@@ -36,8 +36,21 @@ class StoryBoard extends Component {
     }
 
     handleDelete = (id) => {
+        const token = localStorage.getItem('token');
         const content = this.state.content.filter(item => item._id !== id);
-        this.setState({ content: content })
+
+        fetch(`http://localhost:6530/feed/${id}`, {
+            method: 'delete',
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        }).then(res => res.json()).then(res => 
+            this.setState({ content: content })
+        ).catch(err => {
+            this.setState({ message: 'unexpected error occured'});
+        })
+        
     }
 
     render() {
@@ -69,11 +82,11 @@ class StoryBoard extends Component {
                                 <Card className="shadow-sm">
                                     <Card.Body>
                                         <section className="d-flex inline-block">
-                                            <img src={data.image} alt="img" className="img-story" />
+                                            <img src={data.imageUrl} alt="img" className="img-story" />
                                             <div className="details">
                                                 <Link to={`/stories/${data._id}`} style={{ textDecoration: 'none' }}>
                                                     <h4 className="display-5">{data.title}</h4> </Link>
-                                                <p>{data.desc.substring(0, 10)}...</p>
+                                                <p>{data.desc.substring(0, 200)}...</p>
                                             </div>
                                         </section>
                                         <section className="ml-auto float-right">

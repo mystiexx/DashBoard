@@ -13,12 +13,14 @@ class Header extends Component {
 
     componentDidMount () {
         const token = localStorage.getItem('token');
-        if (!token) this.setState({ loggedIn: false});
+        if (!token) window.location.href='/';
     }
+
     logOut = () => {
         localStorage.removeItem('token');
         window.location.href='/';
     }
+
     render() {
         return (
             <Navbar fixed="top" className="position-sticky" expand="md">

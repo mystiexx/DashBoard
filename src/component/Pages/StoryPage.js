@@ -34,7 +34,7 @@ class StoryPage extends Component {
               <Col className="d-flex flex-column">
                 <div className="d-flex flex-sm-wrap">
                 <iframe className="position-sticky mt-5" alt="video"
-                  style={{ width: 560, height: 315 }} src={`https://www.youtube.com/embed/QhBnZ6NPOY0`} frameBorder="0"
+                  style={{ width: 560, height: 315 }} src={content.videoUrl} frameBorder="0"
                   allow="encrypted-media" allowFullScreen></iframe>
                   </div>
 
