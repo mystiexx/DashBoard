@@ -60,7 +60,9 @@ class StoryBoard extends Component {
 
         const indexOFFirstPost = indexOfLastPost - posts_perpage;
 
-        const filteredContent = this.state.content.slice(indexOFFirstPost, indexOfLastPost);
+        const inVerse = this.state.content.reverse();
+
+        const filteredContent = inVerse.slice(indexOFFirstPost, indexOfLastPost);
 
         const paginate = (pageNumber) => {
             this.setState({
