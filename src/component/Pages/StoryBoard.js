@@ -90,7 +90,7 @@ class StoryBoard extends Component {
                                             </div>
                                         </section>
                                         <section className="ml-auto float-right">
-                                            <Button variant="outline-dark">Edit </Button>
+                                            <Link to={`/edit/${data._id}`} style={{ textDecoration: 'none' }}>Edit</Link>
                                             <Button variant="outline-danger ml-2" onClick={() => this.handleDelete(data._id)}>Delete </Button>
                                         </section>
                                     </Card.Body>

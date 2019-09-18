@@ -3,6 +3,7 @@ import Header from './Nav/Header';
 import Dashboard from './Pages/Dashboard'
 import Tab from './Pages/Tabs'
 import StoryBoard from './Pages/StoryBoard'
+import EditView from './Pages/Edits'
 import './stylesheet/style.css'
 import './stylesheet/search-box.css'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
@@ -34,8 +35,9 @@ class App extends Component {
 
           <Route path="/stories/:id" exact component={StoryPage}/>
 
+          <Route path="/edit/:id"  component={Header}/>
 
-
+          <Route path="/edit/:id" exact component={EditView}/>
 
 
         </div>

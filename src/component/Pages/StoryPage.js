@@ -21,10 +21,12 @@ class StoryPage extends Component {
           content: data
         })
       })
+      console.log(this.state.content)
   }
 
   render() {
     const { content } = this.state
+    console.log(content)
     return (
 
       <div>
@@ -39,7 +41,9 @@ class StoryPage extends Component {
                   </div>
 
                 <h4 className="card-title">{content.title}</h4><br />
-                <p className="card-text text-justify overflow-auto">{content.desc}</p>
+                <p className="card-text text-justify">{content.desc}</p>
+              </Col>
+              <Col>
               </Col>
 
 

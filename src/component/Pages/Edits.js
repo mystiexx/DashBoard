@@ -1,49 +1,83 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 
+class EditView extends Component{
+    constructor() {
+        super()
+        this.state = {
+          content: '',
+          title: '',
+          tagline: '',
+          videoUrl: '',
+          imageUrl: '',
+          desc: '',
+          updated: false
+        }
+      }
 
-class DashBoard extends Component {
-    state = {
-        content: [],
-        title: '',
-        tagline: '',
-        videoUrl: '',
-        imageUrl: '',
-        desc: ''
-    }
-
-    handleChange = (event) => {
-        this.setState({[event.target.name]: event.target.value})
-    }
-
-    componentDidMount () {
-        const token = localStorage.getItem('token');
-        if (!token) window.location.href='/';
-    }
-
-    onSubmitFeed = () => {
-        const token = localStorage.getItem('token');
-        const obj = {
-            title: this.state.title,
-            tagline: this.state.tagline,
-            videoUrl: this.state.videoUrl,
-            imageUrl: this.state.imageUrl,
-            desc: this.state.desc
+      componentDidMount() {
+        const { match } = this.props
+        fetch(`http://localhost:6530/feed/${match.params.id}`)
+          .then(response => response.json())
+          .then(data => {
+            this.setState({
+              title: data.title,
+              tagline: data.tagline,
+              imageUrl: data.imageUrl,
+              videoUrl: data.videoUrl,
+              desc: data.desc
+            })
+          })
+        }
+        
+        handleChange = (event) => {
+            this.setState({[event.target.name]: event.target.value})
         }
 
-        fetch('http://localhost:6530/feed/', {
-            method: 'post',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            },
-            body: JSON.stringify(obj)
-        }).then(res => res.json()).then(res => this.setState({uploaded: true, message: "Story Uploaded Successfully, View in stories"}))
-        .catch(error => this.setState({message: error}))
-    }
+        onUpdateFeed = (event) => {
+            const { match } = this.props
+            const token = localStorage.getItem('token');
+            const obj = [
+                {
+                    propName: "title",
+                    value: this.state.title
+                },
+                {
+                    propName: "tagline",
+                    value: this.state.tagline
+                },
+                {
+                    propName: "imageUrl",
+                    value: this.state.imageUrl
+                },
+                {
+                    propName: "videoUrl",
+                    value: this.state.videoUrl
+                },
+                {
+                    propName: "desc",
+                    value: this.state.desc
+                }
+            ]
+    
+            fetch(`http://localhost:6530/feed/${match.params.id}`, {
+                method: 'put',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(obj)
+            }).then(res => res.json()).then(result => {
+                if(result) {
+                    this.setState({updated: true, message: "Story Updated Successfully, View in stories"})
+                }
+                
+            })
+            .catch(error => this.setState({message: error}))
+        }
 
-    render() {
-        console.log(this.state.title)
-        return (
+        
+    render(){
+        return(
             <div>
                 <div className="container-fluid flex-column mt-2 flex-wrap  justify-content-center">
                     <div className="row mt-3">
@@ -57,11 +91,11 @@ class DashBoard extends Component {
                                     <h3>Admin</h3>
                                 </div>
                             </div>
-                            <div className="row">
+                 <div className="row">
                                 <div className="col-md-12">
                                     <div className="card p-sm-1 mb-5 shadow-sm">
                                         {
-                                            this.state.uploaded && <p className='text-success text-center'>{this.state.message}</p>
+                                            this.state.updated && <p className='text-success text-center'>{this.state.message}</p>
                                         }
                                         <div className="card-body">
                                             <h3>Add a new Story Today</h3>
@@ -72,35 +106,35 @@ class DashBoard extends Component {
                                                     <div className="input-group-append">
                                                         <span className="input-group-text">Title</span>
                                                     </div>
-                                                    <input onChange={this.handleChange} name='title' type="text" className="form-control" />
+                                                    <input name='title' onChange={this.handleChange} value={this.state.title} type="text" className="form-control" />
                                                 </div>
                                                 <div className="input-group mb-3">
                                                     <div className="input-group-append">
                                                         <span className="input-group-text">Tagline</span>
                                                     </div>
-                                                    <input onChange={this.handleChange} name='tagline'  type="text" className="form-control" />
+                                                    <input onChange={this.handleChange} value={this.state.tagline} name='tagline'  type="text" className="form-control" />
                                                 </div>
                                                 <div className="input-group mb-3">
                                                     <div className="input-group-append">
                                                         <span className="input-group-text">Youtube URL</span>
                                                     </div>
-                                                    <input  onChange={this.handleChange}name='videoUrl' type="text" className="form-control" />
+                                                    <input onChange={this.handleChange} value={this.state.videoUrl} name='videoUrl' type="text" className="form-control" />
                                                 </div>
                                                 <div className="input-group mb-3">
-                                                    <div className="input-group-append">
+                                                    <div  className="input-group-append">
                                                         <span className="input-group-text">Image URL</span>
                                                     </div>
-                                                    <input onChange={this.handleChange} name='imageUrl' type="text" className="form-control" />
+                                                    <input onChange={this.handleChange} value={this.state.imageUrl} name='imageUrl' type="text" className="form-control" />
                                                 </div>
                                         
                                                 <div className="input-group mb-3">
                                                     <div className="input-group-append">
                                                         <span className="input-group-text">Description</span>
                                                     </div>
-                                                    <textarea onChange={this.handleChange} name='desc' className="form-control" rows="4" /></div>
+                                                    <textarea onChange={this.handleChange} value={this.state.desc} name='desc' className="form-control" rows="4" /></div>
 
                                                 <button
-                                                    onClick={this.onSubmitFeed}
+                                                    onClick={this.onUpdateFeed}
                                                     className
                                                     ="btn btn-outline-dark btn-lg">Publish</button>
                                             </div>
@@ -108,12 +142,11 @@ class DashBoard extends Component {
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
+</div>
+</div>
+</div>
             </div>
         )
     }
 }
-
-export default DashBoard;
+export default EditView;
