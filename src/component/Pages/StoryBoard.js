@@ -6,6 +6,9 @@ import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import CardGroup from 'react-bootstrap/CardGroup'
 import { Link } from 'react-router-dom'
+import StoryCard from './StoryCard'
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 
 class StoryBoard extends Component {
@@ -78,29 +81,21 @@ class StoryBoard extends Component {
                 <Container className="mt-2 d-flex flex-column flex-sm-column">
                     <SearchBar search={this.handleSearch} />
                     <h2 className="stories-title text-center"> Stories </h2>
+                    <Row>
                     {
-                        filteredContent.map(data =>
-                            <CardGroup className="p-3" key={data._id}>
-                                <Card className="shadow-sm">
-                                    <Card.Body>
-                                        <section className="d-flex inline-block">
-                                            <img src={data.imageUrl} alt="img" className="img-story" />
-                                            <div className="details">
-                                                <Link to={`/stories/${data._id}`} style={{ textDecoration: 'none' }}>
-                                                    <h4 className="display-5">{data.title}</h4> </Link>
-                                                <p>{data.desc.substring(0, 200)}...</p>
-                                            </div>
-                                        </section>
-                                        <section className="ml-auto float-right">
-                                            <Link to={`/edit/${data._id}`} style={{ textDecoration: 'none' }}>Edit</Link>
-                                            <Button variant="outline-danger ml-2" onClick={() => this.handleDelete(data._id)}>Delete </Button>
-                                        </section>
-                                    </Card.Body>
-                                </Card>
-                            </CardGroup>
-
+                        filteredContent.map(data => {
+                            return (
+                                <Col md={4}>
+                                    <StoryCard id={data._id} image={data.imageUrl} title={data.title} desc={data.desc} handleDelete={this.handleDelete}/>
+                                </Col>
+                            )
+                        }
+                           
                         )
                     }
+
+                    </Row>
+                   
 
 
                     <Paginate posts_perpage={posts_perpage} totalPosts={this.state.content.length} paginate={paginate} />
