@@ -21,7 +21,7 @@ import {Redirect} from 'react-router-dom'
             email,
             password
         }
-        fetch('http://localhost:6530/user/login', {
+        fetch('http://urbanplotz.herokuapp.com/user/login', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

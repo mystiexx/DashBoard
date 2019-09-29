@@ -24,7 +24,7 @@ class SignUp extends Component {
             password
         }
 
-        fetch('http://localhost:6530/user/register', {
+        fetch('http://urbanplotz.herokuapp.com/user/register', {
             method: 'post',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(obj)
