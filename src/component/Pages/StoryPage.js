@@ -24,12 +24,10 @@ class StoryPage extends Component {
           content: data
         })
       })
-      console.log(this.state.content)
   }
 
   render() {
     const { content } = this.state
-    console.log(content)
     return (
 
       <div>
