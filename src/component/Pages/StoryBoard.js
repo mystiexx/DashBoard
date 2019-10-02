@@ -41,7 +41,6 @@ class StoryBoard extends Component {
     handleDelete = (id) => {
         const token = localStorage.getItem('token');
         const content = this.state.content.filter(item => item._id !== id);
-
         fetch(`https://urbanplotz.herokuapp.com/feed/${id}`, {
             method: 'delete',
             headers: {
