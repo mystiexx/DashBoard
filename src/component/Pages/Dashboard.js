@@ -30,7 +30,7 @@ class DashBoard extends Component {
             desc: this.state.desc
         }
 
-        fetch('http://urbanplotz.herokuapp.com/feed/', {
+        fetch('https://urbanplotz.herokuapp.com/feed/', {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json',
