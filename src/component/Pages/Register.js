@@ -30,16 +30,17 @@ class SignUp extends Component {
             body: JSON.stringify(obj)
         })
             .then(response => response.json())
-            .then(result => {
+            .then( result => {
                 if(result.token) {
+                     localStorage.setItem( 'token' , result.token );
                     this.setState({ registered: true });
-                    localStorage.setItem( 'token' , result.token );
                 } else{ 
                     this.setState({ message: 'Please Try Again'});
                 }
                 this.setState({ loading:false });
             }).catch(err => {
-                this.setState({ message: 'unexpected error occured'});
+                this.setState({ message: 'unexpected error occured', loading:false });
+                console.log(err);
             })
     }
 

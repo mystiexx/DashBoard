@@ -17,19 +17,17 @@ class StoryPage extends Component {
   
   componentDidMount() {
     const { match } = this.props
-    fetch(`http://localhost:6530/feed/${match.params.id}`)
+    fetch(`https://urbanplotz.herokuapp.com/feed/${match.params.id}`)
       .then(response => response.json())
       .then(data => {
         this.setState({
           content: data
         })
       })
-      console.log(this.state.content)
   }
 
   render() {
     const { content } = this.state
-    console.log(content)
     return (
 
       <div>

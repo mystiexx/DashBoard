@@ -15,11 +15,6 @@ class DashBoard extends Component {
         this.setState({[event.target.name]: event.target.value})
     }
 
-    componentDidMount () {
-        const token = localStorage.getItem('token');
-        if (!token) window.location.href='/';
-    }
-
     onSubmitFeed = () => {
         const token = localStorage.getItem('token');
         const obj = {

@@ -16,7 +16,7 @@ class EditView extends Component{
 
       componentDidMount() {
         const { match } = this.props
-        fetch(`http://localhost:6530/feed/${match.params.id}`)
+        fetch(`https://urbanplotz.herokuapp.com/feed/${match.params.id}`
           .then(response => response.json())
           .then(data => {
             this.setState({
@@ -59,7 +59,7 @@ class EditView extends Component{
                 }
             ]
     
-            fetch(`http://localhost:6530/feed/${match.params.id}`, {
+            fetch(`https://urbanplotz.herokuapp.com/feed/${match.params.id}`, {
                 method: 'put',
                 headers: {
                     'Content-Type': 'application/json',
@@ -72,7 +72,10 @@ class EditView extends Component{
                 }
                 
             })
-            .catch(error => this.setState({message: error}))
+            .catch(error =>{
+                console.log(error)
+                 this.setState({message: error})
+                 })
         }
 
         

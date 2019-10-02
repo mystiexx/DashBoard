@@ -25,7 +25,7 @@ class StoryBoard extends Component {
     }
 
     componentDidMount() {
-        fetch('http://localhost:6530/feed')
+        fetch('https://urbanplotz.herokuapp.com/feed')
             .then(response => response.json())
             .then(feeds => {
                 this.setState({
@@ -41,8 +41,7 @@ class StoryBoard extends Component {
     handleDelete = (id) => {
         const token = localStorage.getItem('token');
         const content = this.state.content.filter(item => item._id !== id);
-
-        fetch(`http://localhost:6530/feed/${id}`, {
+        fetch(`https://urbanplotz.herokuapp.com/feed/${id}`, {
             method: 'delete',
             headers: {
                 'content-type': 'application/json',
