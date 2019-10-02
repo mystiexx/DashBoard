@@ -15,11 +15,6 @@ class DashBoard extends Component {
         this.setState({[event.target.name]: event.target.value})
     }
 
-    componentDidMount () {
-        const token = localStorage.getItem('token');
-        if (!token) window.location.href='/';
-    }
-
     onSubmitFeed = () => {
         const token = localStorage.getItem('token');
         const obj = {
@@ -30,7 +25,7 @@ class DashBoard extends Component {
             desc: this.state.desc
         }
 
-        fetch('http://urbanplotz.herokuapp.com/feed/', {
+        fetch('https://urbanplotz.herokuapp.com/feed/', {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json',
