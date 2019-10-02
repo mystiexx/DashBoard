@@ -21,7 +21,7 @@ import {Redirect} from 'react-router-dom'
             email,
             password
         }
-        fetch('http://urbanplotz.herokuapp.com/user/login', {
+        fetch('https://urbanplotz.herokuapp.com/user/login', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -37,7 +37,8 @@ import {Redirect} from 'react-router-dom'
             }
             this.setState({ loading:false });
         }).catch(err => {
-            this.setState({ message: 'unexpected error occured'});
+            this.setState({ message: 'unexpected error occured', loading:false });
+            console.log(err);
         })
     }
 

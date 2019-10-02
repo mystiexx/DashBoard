@@ -24,7 +24,7 @@ class SignUp extends Component {
             password
         }
 
-        fetch('http://urbanplotz.herokuapp.com/user/register', {
+        fetch('https://urbanplotz.herokuapp.com/user/register', {
             method: 'post',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(obj)
@@ -39,7 +39,8 @@ class SignUp extends Component {
                 }
                 this.setState({ loading:false });
             }).catch(err => {
-                this.setState({ message: 'unexpected error occured'});
+                this.setState({ message: 'unexpected error occured', loading:false });
+                console.log(err);
             })
     }
 
