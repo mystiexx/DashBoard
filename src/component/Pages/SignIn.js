@@ -30,8 +30,9 @@ import {Redirect} from 'react-router-dom'
 
         }).then(res => res.json()).then(data => {
             if (data.token) {
+                localStorage.setItem('token', data.token);
                this.setState({ loggedIn: true});
-               localStorage.setItem('token', data.token);
+               
             } else{ 
                 this.setState({ message: 'invalid email/password combination'});
             }
